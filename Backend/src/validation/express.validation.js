@@ -9,7 +9,7 @@ const registerValidator = [
 ]
 
 const loginValidator = [
-    body('email').isEmail().withMessage("email format is invalid"),
+    body('identifier').isString().withMessage("email format is invalid"),
     body('password').isLength({min:6}).withMessage("password length should be atleast 6 characters"),
     validate
 ]

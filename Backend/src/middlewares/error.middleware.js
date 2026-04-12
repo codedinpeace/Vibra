@@ -1,6 +1,10 @@
 const handleError = (err, req,res,next) => {
-    res.status(err.status).json({
-        message:err.message
+
+    const status = err.status || 500
+
+    res.status(status).json({
+        message:err.message,
+        stack:err.stack
     })       
 }
 

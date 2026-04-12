@@ -10,7 +10,6 @@ const createToken = (userId, res, next) => {
     try {
         const token = jwt.sign({userId}, process.env.JWT_SECRET, {expiresIn:"1d"})
         res.cookie("token", token)
-        res.status(200).json({message:"Token created successfully"})
     } catch (error) {
         const err = error
         err.status = 400
