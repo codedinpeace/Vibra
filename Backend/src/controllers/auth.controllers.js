@@ -1,4 +1,5 @@
 const createToken = require("../config/create-token");
+const redis = require("../config/redis.connection");
 const userModel = require("../models/user.model");
 const bcrypt = require("bcrypt");
 
@@ -96,6 +97,24 @@ const check = async (req, res, next) => {
     }
 };
 
-const logout = async (req, res, next) => {};
+const logout = async (req, res, next) => {
+    try {
+        const token = req.cookies.token
+        if(!token){
+            const err = new Error('invalid token')
+            err.status = 401
+            next(err)
+        }
+
+        res.cookie("token", "") 
+        await redis.set("blackListedToken", token)
+        res.status(200).json({message:"User loggedOut successfully"})
+    } catch (error ) {
+        const err = error
+        err.status = 400
+        next(err)
+    }
+
+};
 
 module.exports = { register, login, check, logout };

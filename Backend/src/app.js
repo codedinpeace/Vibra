@@ -5,6 +5,7 @@ const connectDB = require('./config/connect-db')
 const authRouter = require('./routes/auth.routes')
 const songsRouter = require('./routes/songs.routes')
 const handleError = require('./middlewares/error.middleware')
+const redis = require('./config/redis.connection')
 
 const app = express()
 
@@ -14,6 +15,9 @@ app.use(cookieParser())
 
 // connectDb
 connectDB()
+
+// redis
+redis
 
 // routes
 app.use("/api/auth", authRouter)
