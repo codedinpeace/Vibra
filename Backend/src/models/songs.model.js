@@ -11,3 +11,6 @@ const songSchema = mongoose.Schema({
         minlength:22,
     }
 })
+
+const songModel = mongoose.Model("songs", songSchema)
+module.exports = songModel
