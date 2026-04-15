@@ -1,8 +1,13 @@
 import React from 'react'
+import Navbar from './Components/Navbar'
+import Home from './Features/FaceDetection/Components/Home'
 
 const App = () => {
   return (
-    <div>App</div>
+    <>
+    <Navbar />
+    <Home />
+    </>
   )
 }
 
