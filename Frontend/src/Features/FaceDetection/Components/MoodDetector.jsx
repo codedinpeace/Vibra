@@ -8,18 +8,13 @@ export default function MoodDetector() {
   const [mood, setMood] = useState("Click detect");
   const [loading, setLoading] = useState(true);
 
-
-  // INIT (load model + start camera)
   useEffect(() => {
-    init(faceLandmarkerRef, videoRef, setLoading,setMood);
+    init(faceLandmarkerRef, videoRef, setLoading, setMood);
   }, []);
 
   const handleDetection = () => {
-    handleDetect(videoRef, setMood, faceLandmarkerRef)
-  }
-
-  // BUTTON DETECTION (single frame)
-  
+    handleDetect(videoRef, setMood, faceLandmarkerRef);
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-6 bg-gray-100 p-4">

@@ -19,8 +19,8 @@ export default function Navbar() {
       <div className="flex items-center justify-around max-md:justify-between">
         {/* Left - Logo */}
         <div className="flex flex-col">
-          <h1 className="text-lg text-xl text-blue-600 font-bold">Vibra</h1>
-          <span className="text-xs text-gray-400">Premium Member</span>
+          <h1 className=" text-xl text-blue-600 font-bold">Vibra</h1>
+          <span className="text-xs text-gray-400">Premium Member</span> 
         </div>
 
         {/* Desktop Menu */}
