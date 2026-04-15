@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
+import {Eye, EyeClosed} from 'lucide-react'
+import { useState } from "react";
 
 export default function Login() {
+
+  const [showPassword, setShowPassword] = useState(false)
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-purple-100 flex flex-col justify-between">
       
       {/* Top Bar */}
       <div className="flex justify-between items-center px-6 py-4">
         <h1 className="font-semibold text-gray-700">Digital Curator</h1>
-        <button className="text-sm text-gray-500">Back to home</button>
+        <Link to='/register'><button className="text-sm text-gray-500">Back to SignUp</button></Link>
       </div>
 
       {/* Center Card */}
@@ -29,7 +34,7 @@ export default function Login() {
               Email Address
             </label>
             <input
-              type="email"
+              type="email"  
               placeholder="curator@example.com"
               className="w-full mt-1 px-4 py-3 rounded-lg bg-gray-100 text-sm outline-none"
             />
@@ -43,15 +48,18 @@ export default function Login() {
                 Forgot?
               </span>
             </div>
+            <div className="relative">
             <input
-              type="password"
+              type={showPassword ? "text" : 'password'}
               placeholder="••••••••"
               className="w-full mt-1 px-4 py-3 rounded-lg bg-gray-100 text-sm outline-none"
-            />
+              />
+              {showPassword ? <EyeClosed className="opacity-60 absolute top-4 right-3 cursor-pointer" onClick={()=>{setShowPassword(false)}}/> : <Eye className="opacity-60 absolute top-4 right-3 cursor-pointer" onClick={()=>{setShowPassword(true)}}/>}
+              </div>
           </div>
 
           {/* Button */}
-          <button className="w-full py-3 mt-2 rounded-lg bg-indigo-600 text-white font-medium shadow-md hover:bg-indigo-700 transition">
+          <button className="login-button w-full py-3 mt-2 rounded-lg bg-indigo-600 text-white font-medium shadow-md hover:bg-indigo-700 transition">
             Log In
           </button>
 

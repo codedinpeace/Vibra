@@ -10,3 +10,7 @@ body,html{
 .register-button{
   background: linear-gradient(-35deg, #4456BA, #8596FF);
 }
+
+.login-button{
+  background: linear-gradient(-35deg, #4456BA, #8596FF);
+}

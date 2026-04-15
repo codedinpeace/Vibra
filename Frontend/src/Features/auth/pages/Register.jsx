@@ -1,18 +1,23 @@
 import { Link } from "react-router-dom";
 import RegisterImg from "../../../assets/RegisterImg.png";
+import { useState } from "react";
+import {Eye, EyeClosed} from 'lucide-react'
 
 export default function Register() {
+
+  const [showPassword, setShowPassword] = useState(false)
+
   return (
     <div className="min-h-screen bg-[#f5f6f8] flex flex-col justify-between">
       
-      {/* Top Navbar */}
+      {/* Top Navbar */}  
       <div className="flex justify-between items-center px-6 py-4">
         <h1 className="font-semibold text-gray-700">Digital Curator</h1>
-        <button className="text-sm text-gray-600">Log In</button>
+        <Link to='/login'><button className="text-sm text-gray-600">Log In</button></Link>
       </div>
 
       {/* Main Section */}
-      <div className="flex flex-1 items-center justify-center px-6">
+      <div className="flex flex-1 items-center justify-center px-6">``
         
         <div className="w-full max-w-6xl flex items-center justify-between gap-10">
           
@@ -57,11 +62,14 @@ export default function Register() {
                 placeholder="Email"
                 className="w-full px-4 py-3 rounded-lg bg-gray-100 text-sm outline-none"
               />
-              <input
-                type="password"
-                placeholder="Password"
-                className="w-full px-4 py-3 rounded-lg bg-gray-100 text-sm outline-none"
+               <div className="relative">
+            <input
+              type={showPassword ? "text" : 'password'}
+              placeholder="••••••••"
+              className="w-full mt-1 px-4 py-3 rounded-lg bg-gray-100 text-sm outline-none"
               />
+              {showPassword ? <EyeClosed className="opacity-60 absolute top-4 right-3 cursor-pointer" onClick={()=>{setShowPassword(false)}}/> : <Eye className="opacity-60 absolute top-4 right-3 cursor-pointer" onClick={()=>{setShowPassword(true)}}/>}
+              </div>
             </div>
 
             {/* Terms */}
