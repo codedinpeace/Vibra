@@ -1,14 +1,26 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import avatar from '../assets/Avatar.svg'
+import { useAuthStore } from "../Features/auth/hooks/useAuthStore";
+import Loader from "./Loader";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const {handleLogout, loading} = useAuthStore()
 
   useEffect(() => {
     setLoaded(true); // triggers subtle animation on load
   }, []);
+
+  async function handleSubmit (e) {
+    e.preventDefault()
+    await handleLogout()
+  }
+
+  if(loading) {
+    return <Loader />
+  }
 
   return (
     <nav
@@ -41,9 +53,9 @@ export default function Navbar() {
             alt="profile"
             className="w-10 h-10 rounded-full"
           />
-          <button className="text-lg cursor-pointer font-bold text-gray-600 hover:text-black">
-            Logout
-          </button>
+          <form onSubmit={handleSubmit}>
+            <button className="text-lg cursor-pointer font-bold text-gray-600 hover:text-black">Logout</button>
+            </form>
         </div>
 
         {/* Mobile Hamburger */}
@@ -72,7 +84,9 @@ export default function Navbar() {
               alt="profile"
               className="w-8 h-8 rounded-full"
             />
+            <form onSubmit={handleSubmit}>
             <button className="text-gray-600">Logout</button>
+            </form>
           </div>
         </div>
       </div>

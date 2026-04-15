@@ -10,7 +10,7 @@ export const useAuthStore = () => {
         try {
             setLoading(true)
             const response = await register(username, email, password)
-            setUser(response)
+            setUser(response.registeredUser)
             setLoggedIn(true)
         } catch (error) {
             console.log(error)
@@ -23,7 +23,8 @@ export const useAuthStore = () => {
         try {
             setLoading(true)
             const response = await login(identifier, password)
-            setUser(response)
+            setUser(response.loggedInUser)
+            // console.log(response)
             setLoggedIn(true)            
         } catch (error) {
             console.log(error)
@@ -50,7 +51,7 @@ export const useAuthStore = () => {
         try {
             setLoading(true)
             const response =  await check()
-            setUser(response)
+            setUser(response.authenticatedUser)
             setLoggedIn(true)
         } catch (error) {
             console.log(error)

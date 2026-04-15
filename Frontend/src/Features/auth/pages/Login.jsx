@@ -1,10 +1,32 @@
 import { Link } from "react-router-dom";
 import {Eye, EyeClosed} from 'lucide-react'
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useAuthStore } from "../hooks/useAuthStore";
+import { AuthContext } from "../context/auth.context";
+import Loader from "../../../Components/Loader";
+
 
 export default function Login() {
 
   const [showPassword, setShowPassword] = useState(false)
+  const [identifier, setidentifier] = useState("")
+  const [password, setPassword] = useState("")
+
+  const context = useContext(AuthContext)
+
+  const {user, loading} = context
+  const {handleLogin} = useAuthStore()
+  
+
+  async function handleSubmit  (e) {
+    e.preventDefault()
+    await handleLogin(identifier, password)
+    console.log(user)
+  } 
+
+  if(loading){
+    return <Loader /> 
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-purple-100 flex flex-col justify-between">
@@ -29,13 +51,16 @@ export default function Login() {
           </p>
 
           {/* Email */}
+          <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="text-xs text-gray-500 uppercase">
-              Email Address
+              Email Address 
             </label>
             <input
-              type="email"  
-              placeholder="curator@example.com"
+              onChange={(e)=>{setidentifier(e.target.value)}}
+              value={identifier}
+              type="text"  
+              placeholder="Enter username or password"
               className="w-full mt-1 px-4 py-3 rounded-lg bg-gray-100 text-sm outline-none"
             />
           </div>
@@ -50,6 +75,7 @@ export default function Login() {
             </div>
             <div className="relative">
             <input
+              onChange={(e)=>{setPassword(e.target.value)}}
               type={showPassword ? "text" : 'password'}
               placeholder="••••••••"
               className="w-full mt-1 px-4 py-3 rounded-lg bg-gray-100 text-sm outline-none"
@@ -59,9 +85,10 @@ export default function Login() {
           </div>
 
           {/* Button */}
-          <button className="login-button w-full py-3 mt-2 rounded-lg bg-indigo-600 text-white font-medium shadow-md hover:bg-indigo-700 transition">
+          <button type="submit" className="login-button w-full py-3 mt-2 rounded-lg bg-indigo-600 text-white font-medium shadow-md hover:bg-indigo-700 transition">
             Log In
           </button>
+          </form>
 
           {/* Divider */}
           {/* <div className="flex items-center gap-3 my-5">

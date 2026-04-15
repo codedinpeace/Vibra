@@ -6,6 +6,7 @@ const authRouter = require('./routes/auth.routes')
 const songsRouter = require('./routes/songs.routes')
 const handleError = require('./middlewares/error.middleware')
 const redis = require('./config/redis.connection')
+const cors = require('cors')
 
 const app = express()
 
@@ -18,6 +19,12 @@ connectDB()
 
 // redis
 redis
+
+// cors
+app.use(cors({
+    origin:"http://localhost:5173",
+    credentials:true,
+}))
 
 // routes
 app.use("/api/auth", authRouter)

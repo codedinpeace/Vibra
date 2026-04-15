@@ -1,11 +1,32 @@
 import { Link } from "react-router-dom";
 import RegisterImg from "../../../assets/RegisterImg.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {Eye, EyeClosed} from 'lucide-react'
+import { useAuthStore } from "../hooks/useAuthStore";
+import { AuthContext } from "../context/auth.context";
+import Loader from "../../../Components/Loader";
 
 export default function Register() {
 
   const [showPassword, setShowPassword] = useState(false)
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const context = useContext(AuthContext)
+  const {loading} = context 
+
+  const {handleRegister} = useAuthStore()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await handleRegister(email, email, password)
+  } 
+
+  if(loading) {
+    return <Loader />
+  }
+
 
   return (
     <div className="min-h-screen bg-[#f5f6f8] flex flex-col justify-between">
@@ -51,19 +72,26 @@ export default function Register() {
             </p>
 
             {/* Inputs */}
+            <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-4">
               <input
+                onChange={(e)=>{setUsername(e.target.value)}}
+                value={username }
                 type="text"
                 placeholder="Name"
                 className="w-full px-4 py-3 rounded-lg bg-gray-100 text-sm outline-none"
               />
               <input
+                onChange={(e)=>{setEmail(e.target.value)}}
+                value={email}
                 type="email"
                 placeholder="Email"
                 className="w-full px-4 py-3 rounded-lg bg-gray-100 text-sm outline-none"
               />
                <div className="relative">
             <input
+              onChange={(e)=>{setPassword(e.target.value)}}
+              value={password}
               type={showPassword ? "text" : 'password'}
               placeholder="••••••••"
               className="w-full mt-1 px-4 py-3 rounded-lg bg-gray-100 text-sm outline-none"
@@ -91,6 +119,7 @@ export default function Register() {
             <button className="register-button w-full mt-5 py-3 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition">
               Get Started
             </button>
+            </form>
 
             {/* Divider */}
             {/* <div className="flex items-center gap-3 my-5">
