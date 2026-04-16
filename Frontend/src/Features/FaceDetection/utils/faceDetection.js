@@ -2,8 +2,10 @@ import {
   FaceLandmarker,
   FilesetResolver,
 } from "@mediapipe/tasks-vision";
+import { useSongStore } from "../hooks/useSongStore";
 
 // INIT → only load model
+
 export const init = async (faceLandmarkerRef, setLoading, setMood) => {
   try {
     const vision = await FilesetResolver.forVisionTasks(
@@ -94,15 +96,21 @@ export const handleDetect = async (
     leftBrowEyeDist < 0.04 &&
     rightBrowEyeDist < 0.04;
 
+    let detectedMood;
+
   if (isHappy) {
-    setMood("happy");
+    detectedMood = "happy";
   } else if (isSad) {
-    setMood("sad");
+    detectedMood = "sad";
   } else if (isNeutral) {
-    setMood("neutral");
+    detectedMood = "neutral";
   } else if (isAngry) {
-    setMood("angry");
+    detectedMood = "angry";
   } else {
-    setMood("neutral");
+    detectedMood = "neutral";
   }
+
+  setMood(detectedMood)
+  return detectedMood
+
 };

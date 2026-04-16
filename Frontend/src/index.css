@@ -14,3 +14,16 @@ body,html{
 .login-button{
   background: linear-gradient(-35deg, #4456BA, #8596FF);
 }
+
+.detect-button{
+  background: #4456BA;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1;   }
+}
+
+@utility animate-breathe {
+  animation: breathe 3s ease-in-out infinite;
+}

@@ -1,4 +1,4 @@
-import { api } from "../../../utils/api";
+import api from "../../../axiosInstance/api";
 
 export const register = async (username,email,password) =>{
     try {

@@ -2,7 +2,7 @@ import React from 'react'
 
 const PlayListSection = () => {
   return (
-    <div>PlayListSection</div>
+    <div></div>
   )
 }
 
