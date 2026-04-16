@@ -27,3 +27,7 @@ body,html{
 @utility animate-breathe {
   animation: breathe 3s ease-in-out infinite;
 }
+
+body{
+  overflow: hidden;
+}

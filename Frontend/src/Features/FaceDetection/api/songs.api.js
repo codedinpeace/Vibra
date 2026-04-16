@@ -10,3 +10,12 @@ export const getSongs = async (mood) => {
     }
 }
 
+export const getTracks = async (id) => {
+    try {
+        const response = await api.get(`/song/playlist/${id}/tracks`)
+        return response.data
+    } catch (error) {
+    console.log(error)        
+    }
+}
+
